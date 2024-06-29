@@ -1,5 +1,5 @@
 function cargarDatosTabla(id) {
-    var url = 'https://script.google.com/macros/s/AKfycbwav7zb2cW5w1TM0VjpnSrprw8tJKzOZTtxncb7gz24VehkWBL9E5luLfod9RGlE5uxGg/exec=' + id;
+    var url = 'https://script.google.com/macros/s/AKfycbwav7zb2cW5w1TM0VjpnSrprw8tJKzOZTtxncb7gz24VehkWBL9E5luLfod9RGlE5uxGg/exec';
 
     fetch(url)
         .then(response => response.json())
