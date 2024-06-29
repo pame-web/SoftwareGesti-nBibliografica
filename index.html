@@ -33,6 +33,7 @@
         }
         .table-container {
             margin-top: 40px;
+            display: none; /* Por defecto, ocultar todas las tablas */
         }
         table {
             width: 80%;
@@ -51,9 +52,9 @@
         <h1>Software de Gestión de Bibliografía</h1>
     </div>
     <div class="btn-group">
-        <a href="#facultad" class="btn">FACULTAD</a>
-        <a href="#materia" class="btn">MATERIA</a>
-        <a href="#material" class="btn">MATERIAL</a>
+        <a href="#" class="btn" onclick="mostrarTabla('facultad')">FACULTAD</a>
+        <a href="#" class="btn" onclick="mostrarTabla('materia')">MATERIA</a>
+        <a href="#" class="btn" onclick="mostrarTabla('material')">MATERIAL</a>
     </div>
     
     <!-- Sección de Facultad -->
@@ -112,6 +113,22 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+        function mostrarTabla(id) {
+            // Ocultar todas las tablas
+            var tablas = document.getElementsByClassName('table-container');
+            for (var i = 0; i < tablas.length; i++) {
+                tablas[i].style.display = 'none';
+            }
+            
+            // Mostrar la tabla correspondiente
+            var tablaMostrar = document.getElementById(id);
+            if (tablaMostrar) {
+                tablaMostrar.style.display = 'block';
+            }
+        }
+    </script>
 
 </body>
 </html>
