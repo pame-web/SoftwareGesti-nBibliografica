@@ -1,55 +1,53 @@
-// Función para obtener y mostrar datos de Facultad
-async function obtenerFacultades() {
-  const url = 'https://script.google.com/macros/s/AKfycbyrJyJ0mz3OkS4UNSoGN5f-rxX9MTj24ffyBL2o4sQ5H29LExgECo-oqJTA03FGLfSBYg/exec?tipo=facultad';
-
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('Error al obtener datos de Facultades');
+function mostrarTabla(id) {
+    // Ocultar todas las tablas
+    var tablas = document.getElementsByClassName('table-container');
+    for (var i = 0; i < tablas.length; i++) {
+        tablas[i].style.display = 'none';
     }
-    const data = await response.json();
-    console.log('Facultades:', data);
-    // Aquí puedes procesar los datos recibidos
-  } catch (error) {
-    console.error('Error:', error);
-  }
+    
+    // Mostrar la tabla correspondiente
+    var tablaMostrar = document.getElementById(id);
+    if (tablaMostrar) {
+        tablaMostrar.style.display = 'block';
+        cargarDatosTabla(id);
+    }
 }
 
-// Función para obtener y mostrar datos de Materia
-async function obtenerMaterias() {
-  const url = 'https://script.google.com/macros/s/AKfycbyrJyJ0mz3OkS4UNSoGN5f-rxX9MTj24ffyBL2o4sQ5H29LExgECo-oqJTA03FGLfSBYg/exec?tipo=materia';
+function cargarDatosTabla(id) {
+    var url = 'https://script.google.com/macros/s/AKfycbxSqi5cRv_08OABOdvsc3QGrm6xvmV4yF6fw2P2Fs51ax31839NQ2V80E5l7ggXz_FlyA/exec?sheet=' + id;
 
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('Error al obtener datos de Materias');
-    }
-    const data = await response.json();
-    console.log('Materias:', data);
-    // Aquí puedes procesar los datos recibidos
-  } catch (error) {
-    console.error('Error:', error);
-  }
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var tbody = document.getElementById('tabla' + id.charAt(0).toUpperCase() + id.slice(1) + 'Body'); // Ejemplo: 'tablaFacultadBody'
+            tbody.innerHTML = ''; // Limpiar tabla antes de llenar
+
+            data.forEach(item => {
+                var row = document.createElement('tr');
+                if (id === 'facultad') {
+                    row.innerHTML = `
+                        <td>${item.id}</td>
+                        <td>${item.codigo_facultad}</td>
+                        <td>${item.descripcion_facultad}</td>
+                    `;
+                } else if (id === 'materia') {
+                    row.innerHTML = `
+                        <td>${item.id}</td>
+                        <td>${item.cod_materia}</td>
+                        <td>${item.descripcion}</td>
+                        <td>${item.credito}</td>
+                    `;
+                } else if (id === 'material') {
+                    row.innerHTML = `
+                        <td>${item.id}</td>
+                        <td>${item.edición}</td>
+                        <td>${item.autor}</td>
+                        <td>${item.fecha}</td>
+                        <td>${item.descripcion}</td>
+                    `;
+                }
+                tbody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error al obtener datos:', error));
 }
-
-// Función para obtener y mostrar datos de Material
-async function obtenerMateriales() {
-  const url = 'https://script.google.com/macros/s/AKfycbyrJyJ0mz3OkS4UNSoGN5f-rxX9MTj24ffyBL2o4sQ5H29LExgECo-oqJTA03FGLfSBYg/exec?tipo=material';
-
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('Error al obtener datos de Materiales');
-    }
-    const data = await response.json();
-    console.log('Materiales:', data);
-    // Aquí puedes procesar los datos recibidos
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
-
-// Llamar a las funciones para obtener y mostrar los datos
-obtenerFacultades();
-obtenerMaterias();
-obtenerMateriales();
