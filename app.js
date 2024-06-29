@@ -7,7 +7,7 @@ function cargarDatosTabla(id) {
             console.log('Datos recibidos:', data); // Verifica qué datos estás recibiendo
 
             var tbody = document.getElementById('tabla' + id.charAt(0).toUpperCase() + id.slice(1) + 'Body');
-            tbody.innerHTML = ''; // Limpiar tabla antes de llenar
+          
 
             data.forEach(item => {
                 var row = document.createElement('tr');
