@@ -68,7 +68,7 @@
                     <th>Descripción Facultad</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tablaFacultadBody">
                 <!-- Los datos se llenarán dinámicamente aquí -->
             </tbody>
         </table>
@@ -86,7 +86,7 @@
                     <th>Crédito</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tablaMateriaBody">
                 <!-- Los datos se llenarán dinámicamente aquí -->
             </tbody>
         </table>
@@ -105,54 +105,12 @@
                     <th>Descripción</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tablaMaterialBody">
                 <!-- Los datos se llenarán dinámicamente aquí -->
             </tbody>
         </table>
     </div>
 
-    <script>
-        function mostrarTabla(id) {
-            // Ocultar todas las tablas
-            var tablas = document.getElementsByClassName('table-container');
-            for (var i = 0; i < tablas.length; i++) {
-                tablas[i].style.display = 'none';
-            }
-            
-            // Mostrar la tabla correspondiente
-            var tablaMostrar = document.getElementById(id);
-            if (tablaMostrar) {
-                tablaMostrar.style.display = 'block';
-                cargarDatosTabla(id);
-            }
-        }
-
-        function cargarDatosTabla(id) {
-            var url = 'https://script.google.com/macros/s/AKfycbxSqi5cRv_08OABOdvsc3QGrm6xvmV4yF6fw2P2Fs51ax31839NQ2V80E5l7ggXz_FlyA/exec?sheet=' + id;
-
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    var tabla = document.getElementById('tabla' + id.charAt(0).toUpperCase() + id.slice(1)); // Ejemplo: 'tablaFacultad'
-                    var tbody = tabla.querySelector('tbody');
-                    tbody.innerHTML = ''; // Limpiar tabla antes de llenar
-
-                    data.forEach(item => {
-                        var row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td>${item.id}</td>
-                            <td>${item.codigo_facultad || item.cod_materia || item.edición}</td>
-                            <td>${item.descripcion_facultad || item.descripcion}</td>
-                            <td>${item.credito || item.autor}</td>
-                            <td>${item.fecha}</td>
-                            <td>${item.descripcion}</td>
-                        `;
-                        tbody.appendChild(row);
-                    });
-                })
-                .catch(error => console.error('Error al obtener datos:', error));
-        }
-    </script>
-
+    <script src="app.js"></script>
 </body>
 </html>
