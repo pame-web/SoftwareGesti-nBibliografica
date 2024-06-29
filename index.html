@@ -64,8 +64,8 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Código</th>
-                    <th>Descripción</th>
+                    <th>Código Facultad</th>
+                    <th>Descripción Facultad</th>
                 </tr>
             </thead>
             <tbody>
@@ -81,7 +81,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Código</th>
+                    <th>Código Materia</th>
                     <th>Descripción</th>
                     <th>Crédito</th>
                 </tr>
@@ -139,11 +139,14 @@
 
                     data.forEach(item => {
                         var row = document.createElement('tr');
-                        for (var key in item) {
-                            var cell = document.createElement('td');
-                            cell.textContent = item[key];
-                            row.appendChild(cell);
-                        }
+                        row.innerHTML = `
+                            <td>${item.id}</td>
+                            <td>${item.codigo_facultad || item.cod_materia || item.edición}</td>
+                            <td>${item.descripcion_facultad || item.descripcion}</td>
+                            <td>${item.credito || item.autor}</td>
+                            <td>${item.fecha}</td>
+                            <td>${item.descripcion}</td>
+                        `;
                         tbody.appendChild(row);
                     });
                 })
