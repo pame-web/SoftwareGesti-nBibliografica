@@ -1,18 +1,4 @@
-function mostrarTabla(id) {
-    // Ocultar todas las tablas
-    var tablas = document.getElementsByClassName('table-container');
-    for (var i = 0; i < tablas.length; i++) {
-        tablas[i].style.display = 'none';
-    }
-    
-    // Mostrar la tabla correspondiente
-    var tablaMostrar = document.getElementById(id);
-    if (tablaMostrar) {
-        tablaMostrar.style.display = 'block';
-        cargarDatosTabla(id);
-    }
-}
-
+// Función para cargar y mostrar los datos según la hoja seleccionada
 function cargarDatosTabla(id) {
     var url = 'https://script.google.com/macros/s/AKfycbxSqi5cRv_08OABOdvsc3QGrm6xvmV4yF6fw2P2Fs51ax31839NQ2V80E5l7ggXz_FlyA/exec?sheet=' + id;
 
