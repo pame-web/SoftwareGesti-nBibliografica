@@ -112,5 +112,22 @@
     </div>
 
     <script src="app.js"></script>
+    <script>
+        // Función para mostrar la tabla correspondiente y cargar los datos
+        function mostrarTabla(id) {
+            // Ocultar todas las tablas
+            var tablas = document.getElementsByClassName('table-container');
+            for (var i = 0; i < tablas.length; i++) {
+                tablas[i].style.display = 'none';
+            }
+            
+            // Mostrar la tabla correspondiente
+            var tablaMostrar = document.getElementById(id);
+            if (tablaMostrar) {
+                tablaMostrar.style.display = 'block';
+                cargarDatosTabla(id); // Llamar a cargarDatosTabla para cargar los datos
+            }
+        }
+    </script>
 </body>
 </html>
