@@ -1,20 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Software de Gestión de Bibliografía</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software de Gestión de Bibliografía</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .title {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .btn-group {
+            margin-top: 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-  <h1>Facultades</h1>
-  <div id="facultades-list"></div>
-
-  <h1>Materias</h1>
-  <div id="materias-list"></div>
-
-  <h1>Materiales</h1>
-  <div id="materiales-list"></div>
-
-  <script src="app.js"></script>
+    <div class="title">
+        <h1>Software de Gestión de Bibliografía</h1>
+    </div>
+    <div class="btn-group">
+        <a href="#facultad" class="btn">FACULTAD</a>
+        <a href="#materia" class="btn">MATERIA</a>
+        <a href="#material" class="btn">MATERIAL</a>
+    </div>
 </body>
 </html>
