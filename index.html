@@ -60,18 +60,16 @@
     <!-- Sección de Facultad -->
     <div id="facultad" class="table-container">
         <h2>Facultad</h2>
-        <table>
+        <table id="tablaFacultad">
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Código</th>
+                    <th>Descripción</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                </tr>
+                <!-- Los datos se llenarán dinámicamente aquí -->
             </tbody>
         </table>
     </div>
@@ -79,18 +77,17 @@
     <!-- Sección de Materia -->
     <div id="materia" class="table-container">
         <h2>Materia</h2>
-        <table>
+        <table id="tablaMateria">
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Código</th>
+                    <th>Descripción</th>
+                    <th>Crédito</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                </tr>
+                <!-- Los datos se llenarán dinámicamente aquí -->
             </tbody>
         </table>
     </div>
@@ -98,18 +95,18 @@
     <!-- Sección de Material -->
     <div id="material" class="table-container">
         <h2>Material</h2>
-        <table>
+        <table id="tablaMaterial">
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Edición</th>
+                    <th>Autor</th>
+                    <th>Fecha</th>
+                    <th>Descripción</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>9</td>
-                </tr>
+                <!-- Los datos se llenarán dinámicamente aquí -->
             </tbody>
         </table>
     </div>
@@ -126,7 +123,31 @@
             var tablaMostrar = document.getElementById(id);
             if (tablaMostrar) {
                 tablaMostrar.style.display = 'block';
+                cargarDatosTabla(id);
             }
+        }
+
+        function cargarDatosTabla(id) {
+            var url = 'https://script.google.com/macros/s/AKfycbxSqi5cRv_08OABOdvsc3QGrm6xvmV4yF6fw2P2Fs51ax31839NQ2V80E5l7ggXz_FlyA/exec?sheet=' + id;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    var tabla = document.getElementById('tabla' + id.charAt(0).toUpperCase() + id.slice(1)); // Ejemplo: 'tablaFacultad'
+                    var tbody = tabla.querySelector('tbody');
+                    tbody.innerHTML = ''; // Limpiar tabla antes de llenar
+
+                    data.forEach(item => {
+                        var row = document.createElement('tr');
+                        for (var key in item) {
+                            var cell = document.createElement('td');
+                            cell.textContent = item[key];
+                            row.appendChild(cell);
+                        }
+                        tbody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error al obtener datos:', error));
         }
     </script>
 
